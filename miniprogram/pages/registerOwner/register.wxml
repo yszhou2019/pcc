@@ -1,0 +1,7 @@
+<!--pages/register/register.wxml-->
+<input class='input' placeholder='请输入姓名' bindinput='inputName'></input>
+<input class='input' placeholder='请输入电话' bindinput='inputPhone'></input>
+<input class='input' placeholder='请输入车牌号' bindinput='inputLicense'></input>
+<input class='input' placeholder='选择车型' bindinput='inputType'></input>
+<input class='input' placeholder='选择车身颜色' bindinput='inputColor'></input>
+<button class='button' type='primary' bindtap='registerOwner'>注册</button>

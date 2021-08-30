@@ -1,0 +1,37 @@
+/* pages/infoUser/infoUser.wxss */
+
+.container {
+	padding: 0;
+    background-color: #fff;
+}
+
+.scroll-view-item {
+	position: relative;
+	margin-left: 28rpx;
+	border-bottom: 2rpx solid #eee;
+}
+
+.scroll-view-item navigator {
+	padding: 30rpx 30rpx 30rpx 0;
+}
+
+.scroll-view-item .order-id {
+	font-size: 36rpx;
+	color: #333;
+}
+
+.scroll-view-item .order-time {
+	float: right;
+	color: #999;
+	margin-top: 12rpx;
+	margin-right: 30rpx;
+	font-size: 36rpx;
+}
+
+.scroll-view-item .arrow {
+	position: absolute;
+	top: 50rpx;
+	right: 20rpx;
+	width: 36rpx;
+	height: 36rpx;
+}
