@@ -76,7 +76,7 @@
 
 <!-- 云数据库测试 -->
 <view class="uploader">
-  <navigator url="../registerUser/register" open-type="navigate" class="uploader-text">
+  <navigator url="../optionsUser/optionsUser" open-type="navigate" class="uploader-text">
     <text>乘客版</text>
   </navigator>
 </view>
@@ -84,7 +84,7 @@
 
 <!-- 云数据库测试 -->
 <view class="uploader">
-  <navigator url="../registerOwner/register" open-type="navigate" class="uploader-text">
+  <navigator url="../optionsOwner/optionsOwner" open-type="navigate" class="uploader-text">
     <text>车主版</text>
   </navigator>
 </view>

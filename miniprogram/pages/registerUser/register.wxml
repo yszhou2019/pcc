@@ -1,3 +1,0 @@
-<!--pages/register/register.wxml-->
-<input class='input' placeholder='请输入电话' bindinput='inputPhone'></input>
-<button class='button' type='primary' bindtap='registerUser'>注册</button>

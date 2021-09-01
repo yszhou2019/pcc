@@ -1,0 +1,18 @@
+<!--pages/optionsUser/optionsUser.wxml-->
+<view class="container">
+
+<!-- 云数据库测试 -->
+<view class="uploader">
+<navigator url="../registerUser/registerUser" open-type="navigate" class="uploader-text">
+  <text>个人信息</text>
+</navigator>
+</view>
+
+<!-- 云数据库测试 -->
+<view class="uploader">
+<navigator url="../infoUser/infoUser" open-type="navigate" class="uploader-text">
+  <text>查看订单</text>
+</navigator>
+</view>
+
+</view>

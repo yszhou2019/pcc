@@ -14,6 +14,13 @@ Page({
   },
 
   onLoad: function() {
+    wx.cloud.callFunction({
+      name: 'login',
+      data: {},
+      success: res =>{
+        app.globalData.openid = res.result.openid
+      }
+    })
     if (!wx.cloud) {
       wx.redirectTo({
         url: '../chooseLib/chooseLib',

@@ -13,12 +13,13 @@
     "pages/openapi/cloudid/cloudid",
     "pages/im/im",
     "pages/im/room/room",
-    
-    "pages/registerUser/register",
-    "pages/registerOwner/register",
+    "pages/registerUser/registerUser",
+    "pages/registerOwner/registerOwner",
     "pages/infoUser/infoUser",
     "pages/infoOwner/infoOwner",
-    "pages/order/order"
+    "pages/order/order",
+    "pages/optionsOwner/optionsOwner",
+    "pages/optionsUser/optionsUser"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

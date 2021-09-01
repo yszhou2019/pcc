@@ -1,33 +1,80 @@
 // pages/infoOwner/infoOwner.js
+let app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    orderData: []
+    orderData: [],
+    driverId: null,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function () {
     const db = wx.cloud.database()
-    db.collection('order').where({
-      driverId: options.driverId
+    // 首先根据openid 获取对应的driverid
+    db.collection('owner').where({
+      _openid: app.globalData.openid
     }).get({
-      success: res => {
-        this.setData({
-          orderData: res.data
-        })
-        console.log('[数据库] [查询记录] 成功: ', res)
+      success: res=>{ 
+        if(res.data.length == 0){
+          wx.showToast({
+            icon: 'none',
+            title: '尚未注册',
+            mask: true,
+            success(){
+              setTimeout(()=>{
+                wx.navigateTo({
+                  url: '../registerOwner/register',
+                })
+              }, 1000)
+            }
+          })
+        }
+        else{
+          db.collection('order').where({
+            driverId: res.data[0].driverId
+          }).get({
+            success: res => {
+              this.setData({
+                orderData: res.data
+              })
+              if(res.data.length == 0){
+                wx.showToast({
+                  icon: 'none',
+                  title: '没有任何订单'
+                })
+              }
+              console.log('[数据库] [查询记录] 成功: ', res)
+              },
+              fail: err => {
+                wx.showToast({
+                  icon: 'none',
+                  title: '查询记录失败'
+                })
+                console.error('[数据库] [查询记录] 失败：', err)
+              }
+            })
+        }
       },
-      fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '查询记录失败'
-        })
-        console.error('[数据库] [查询记录] 失败：', err)
+      fail: err=>{
+        if(res.data.length == 0){
+          wx.showToast({
+            icon: 'none',
+            title: '尚未注册',
+            mask: true,
+            success(){
+              setTimeout(()=>{
+                wx.navigateTo({
+                  url: '../registerOwner/register',
+                })
+              }, 1000)
+            }
+          })
+        }
       }
     })
   },

@@ -4,7 +4,7 @@
       <view>
         <view class="title-2">详细信息</view>
         <view class="card">
-          <text class="attention">订单id：{{id}}\n</text>
+          <text class="attention">订单id：{{orderid}}\n</text>
           <text class="attention">司机id：{{driverId}}\n</text>
           <text class="attention">乘客：{{passengers}}\n</text>
           <text class="attention">出发地：{{departure}}\n</text>

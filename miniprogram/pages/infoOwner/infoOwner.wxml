@@ -2,8 +2,8 @@
     <scroll-view scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}"
         scroll-top="{{scrollTop}}">
         <view class="scroll-view-item" wx:key="*this" wx:for="{{orderData}}" wx:for-item="item">
-            <navigator url="/pages/order/order?id={{item.id}}" hover="none">
-                <text class="order-id">订单编号{{item.id}}</text>
+            <navigator url="/pages/order/order?orderid={{item.orderid}}" hover="none">
+                <text class="order-id">订单编号{{item.orderid}}</text>
                 <text class="order-time">订单日期{{item.time}}</text> 
                 <image class="arrow" mode="aspectFit" src="/images/arrow.png"></image>   
             </navigator>

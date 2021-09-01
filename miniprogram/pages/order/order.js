@@ -28,7 +28,7 @@ Page({
       success: res => {
         console.log(res.data[0])
         this.setData({
-					id: res.data[0].id,
+					orderid: res.data[0].orderid,
 					driverId: res.data[0].driverId,
 					passengers: res.data[0].passengers,
 					departure: res.data[0].departure,
