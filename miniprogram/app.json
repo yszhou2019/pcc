@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/order/order",
+    "pages/info/info",
+
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
     "pages/databaseGuide/databaseGuide",
@@ -17,16 +20,57 @@
     "pages/registerOwner/registerOwner",
     "pages/infoUser/infoUser",
     "pages/infoOwner/infoOwner",
-    "pages/order/order",
     "pages/optionsOwner/optionsOwner",
-    "pages/optionsUser/optionsUser"
+    "pages/optionsUser/optionsUser",
+    "pages/signup/signup"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarTitleText": "黄渡拼车",
     "navigationBarTextStyle": "black"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#000000",
+    "selectedColor": "#000000",
+    "borderStyle": "white",
+    "list": [
+      {
+        "selectedIconPath": "images/home_selected.png",
+        "iconPath": "images/home.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath": "images/other_selected.png",
+        "iconPath": "images/other.png",
+        "pagePath": "pages/index/index",
+        "text": "其他"
+      },
+      {
+        "selectedIconPath": "images/user_selected.png",
+        "iconPath": "images/user.png",
+        "pagePath": "pages/index/index",
+        "text": "个人"
+      }
+    ]
+  },
+  "usingComponents": {
+    "van-picker": "@vant/weapp/picker/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-grid": "@vant/weapp/grid/index",
+    "van-grid-item": "@vant/weapp/grid-item/index",
+    "van-row": "@vant/weapp/row/index",
+    "van-divider": "@vant/weapp/divider/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-card": "@vant/weapp/card/index",
+    "van-rate": "@vant/weapp/rate/index"
+  }
 }

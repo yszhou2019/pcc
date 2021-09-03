@@ -5,33 +5,81 @@ Page({
   data: {
     avatarUrl: './user-unlogin.png',
     userInfo: {},
-    hasUserInfo: false,
     logged: false,
     takeSession: false,
     requestResult: '',
     canIUseGetUserProfile: false,
-    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') // 如需尝试获取用户信息可改为false
+    canIUseGetOpenData: false,
+    logged: false,
+    // canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') // 如需尝试获取用户信息可改为false
+    loading: true,
+    active: 0,
+
   },
 
-  onLoad: function() {
-    wx.cloud.callFunction({
-      name: 'login',
-      data: {},
-      success: res =>{
-        app.globalData.openid = res.result.openid
+  onChange(event) {
+    // event.detail 的值为当前选中项的索引
+    this.setData({ active: event.detail });
+  },
+  onReady() {
+    this.setData({
+      loading: false,
+    })},
+  onLoad: function(e) {
+    try{
+      let userInfo = wx.getStorageSync('userInfo')
+      if(userInfo){
+        this.setData({
+          userInfo: userInfo,
+          logged: true,
+          avatarUrl: userInfo.avatarUrl,
+        })
+        console.log(userInfo)
       }
-    })
-    if (!wx.cloud) {
-      wx.redirectTo({
-        url: '../chooseLib/chooseLib',
-      })
-      return
+    }catch(e){
+      console.log(e)
     }
-    if (wx.getUserProfile) {
-      this.setData({
-        canIUseGetUserProfile: true,
-      })
-    }
+    // if (userInfo.nickName) {
+    //   this.setData({
+    //     userInfo: userInfo,
+    //     logged: true
+    //   })
+    // } else {
+      // // 查看是否授权
+      // wx.getSetting({
+      //   success: res => {
+      //     if (res.authSetting['scope.userInfo']) {
+      //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+      //       wx.getUserInfo({
+      //         success: res => {
+      //           this.setData({
+      //             userInfo: res.userInfo
+      //           })
+      //         }
+      //       })
+      //     }
+      //   }
+      // })
+    // }
+
+    // wx.cloud.callFunction({
+    //   name: 'login',
+    //   data: {},
+    //   success: res =>{
+    //     app.globalData.openid = res.result.openid
+    //   }
+    // })
+    // if (!wx.cloud) {
+    //   wx.redirectTo({
+    //     url: '../chooseLib/chooseLib',
+    //   })
+    //   return
+    // }
+    // if (wx.getUserProfile) {
+    //   this.setData({
+    //     canIUseGetUserProfile: true,
+    //   })
+    // }
   },
 
   getUserProfile() {
@@ -42,7 +90,13 @@ Page({
         this.setData({
           avatarUrl: res.userInfo.avatarUrl,
           userInfo: res.userInfo,
-          hasUserInfo: true,
+          logged: true,
+        })
+        wx.setStorageSync('userInfo', res.userInfo)
+        wx.setStorageSync('logged', true)
+        // todo 跳转到个人信息注册页面
+        wx.navigateTo({
+          url: '../info/info',
         })
       }
     })
@@ -56,7 +110,14 @@ Page({
         userInfo: e.detail.userInfo,
         hasUserInfo: true,
       })
+      wx.setStorageSync('userInfo', userInfo)
     }
+  },
+
+  onUpdateInfo: function() {
+    wx.navigateTo({
+      url: '../info/info',
+    })
   },
 
   onGetOpenid: function() {
@@ -67,14 +128,14 @@ Page({
       success: res => {
         console.log('[云函数] [login] user openid: ', res.result.openid)
         app.globalData.openid = res.result.openid
-        wx.navigateTo({
-          url: '../userConsole/userConsole',
-        })
+        // wx.navigateTo({
+        //   url: '../info/info',
+        // })
       },
       fail: err => {
         console.error('[云函数] [login] 调用失败', err)
-        wx.navigateTo({
-          url: '../deployFunctions/deployFunctions',
+        wx.navigateBack({
+          delta: 0,
         })
       }
     })

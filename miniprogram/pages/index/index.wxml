@@ -3,21 +3,8 @@
 
   <!-- 用户 openid -->
   <view class="userinfo">
-    <block wx:if="{{canIUseOpenData}}" class="userinfo-opendata">
-      <view class="userinfo-block-avatar" bindtap="bindViewTap">
-        <open-data type="userAvatarUrl"></open-data>
-      </view>
-    </block>
-    <block wx:elif="{{!hasUserInfo}}">
-      <button 
-        wx:if="{{canIUseGetUserProfile}}" 
-        bindtap="getUserProfile"
-        class="userinfo-avatar"
-        style="background-image: url({{avatarUrl}})"
-        size="default"
-      ></button>
+    <block>
       <button
-        wx:else
         open-type="getUserInfo" 
         bindgetuserinfo="onGetUserInfo"
         class="userinfo-avatar"
@@ -25,11 +12,9 @@
         size="default"
       ></button>
     </block>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-block-avatar" src="{{avatarUrl}}" mode="cover"></image>
-    </block>
     <view class="userinfo-nickname-wrapper">
-      <button class="userinfo-nickname" bindtap="onGetOpenid">点击获取 openid</button>
+      <button wx:if="{{!logged}}" class="userinfo-nickname" bindtap="getUserProfile">点击登录</button>
+      <button wx:else class="userinfo-nickname" bindtap="onUpdateInfo">{{userInfo.nickName}}</button>
     </view>
   </view>
 
@@ -75,19 +60,48 @@
 
 
 <!-- 云数据库测试 -->
-<view class="uploader">
+<!-- <view class="uploader">
   <navigator url="../optionsUser/optionsUser" open-type="navigate" class="uploader-text">
     <text>乘客版</text>
   </navigator>
-</view>
+</view> -->
 
 
 <!-- 云数据库测试 -->
-<view class="uploader">
+<!-- <view class="uploader">
   <navigator url="../optionsOwner/optionsOwner" open-type="navigate" class="uploader-text">
     <text>车主版</text>
   </navigator>
-</view>
+</view> -->
 
 
 </view>
+
+<van-divider />
+<van-cell-group inset>
+  <van-grid square>
+  <van-grid-item icon="comment-o" text="订单" url="/pages/order/order"/>
+  <van-grid-item icon="balance-list-o" text="钱包" />
+  <van-grid-item icon="service-o" text="客服" />
+  <van-grid-item icon="setting-o" text="设置" />
+  </van-grid>
+</van-cell-group>
+
+<van-divider />
+<van-tabs active="{{ active }}" bind:change="onChange">
+  <van-tab title="优惠券"></van-tab>
+  <van-tab title="出行卡"></van-tab>
+  <van-tab title="福利金"></van-tab>
+  <van-tab title="积分"></van-tab>
+</van-tabs>
+<van-divider />
+
+<van-cell-group>
+<van-grid square column-num="5">
+<van-grid-item icon="diamond-o" text="成为司机" />
+<van-grid-item icon="chat-o" text="小游戏" />
+<van-grid-item icon="gift-o" text="推荐有奖" />
+<van-grid-item icon="setting-o" text="商旅特惠" />
+<van-grid-item icon="coupon-o" text="兑换码" />
+</van-grid>
+</van-cell-group>

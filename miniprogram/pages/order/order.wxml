@@ -1,21 +1,22 @@
-<view class="box">
-  <view class="iphone">
-    <form class="form">
-      <view>
-        <view class="title-2">详细信息</view>
-        <view class="card">
-          <text class="attention">订单id：{{orderid}}\n</text>
-          <text class="attention">司机id：{{driverId}}\n</text>
-          <text class="attention">乘客：{{passengers}}\n</text>
-          <text class="attention">出发地：{{departure}}\n</text>
-          <text class="attention">目的地：{{destination}}\n</text>
-          <text class="attention">出发时间：{{time}}\n</text>
-          <text class="attention">时间信息：{{dateInfo}}\n</text>
-          <text class="attention">支付费用：{{cost}}\n</text>
-          <text class="attention">订单评分：{{score}}\n</text>
-          <text class="attention">订单状态：{{status}}\n</text>
-        </view>
-      </view>
-    </form>
-  </view>
+<van-card wx:for="{{orders}}" wx:for-item="order"
+  price="{{order.cost}}"
+  desc="{{order.orderid}}"
+  title="时间:{{order.time}}  订单编号:{{order.id}}"
+>
+<view slot="price-top">
+  <text>出发地:{{order.departure}}\n</text>
+  <text>目的地:{{order.destination}}\n</text>
+  <text>同行乘客:{{order.passengers}}\n</text>
+  <text>车主:{{order.driverId}}\n</text>
 </view>
+<view slot="footer">
+  <text>订单状态:{{order.status}}</text>
+  <van-rate
+  value="{{ order.score }}"
+  size="{{ 12 }}"
+  color="#ffd21e"
+  void-icon="star"
+  void-color="#eee"
+  bind:change="onChange"/>
+</view>
+</van-card>

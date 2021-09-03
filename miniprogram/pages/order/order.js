@@ -1,4 +1,7 @@
 // pages/order/order.js
+
+let app = getApp()
+
 Page({
 
 	/**
@@ -6,47 +9,49 @@ Page({
 	 */
 	data: {
     id: null,
-    driverId: null,
-		passengers: null,
-		departure: null,
-		destination: null, 
-		time: null,
-		dateInfo: null,
-		cost: 0,
-		score: 0,
-		status: null
+    orders:[],
 	},
 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
-	onLoad: function (options) {
+	onLoad: function () {
     const db = wx.cloud.database()
-    db.collection('order').where({
-      id: options.id
+    db.collection('user').where({
+      _openid: app.globalData.openid
     }).get({
-      success: res => {
-        console.log(res.data[0])
-        this.setData({
-					orderid: res.data[0].orderid,
-					driverId: res.data[0].driverId,
-					passengers: res.data[0].passengers,
-					departure: res.data[0].departure,
-					destination: res.data[0].destination,
-					startTime: res.data[0].startTime,
-					dateInfo: res.data[0].dateInfo,
-					cost: res.data[0].cost,
-					score: res.data[0].score,
-					status: res.data[0].status
-        })
-        console.log('[数据库] [查询记录] 成功: ', res)
-      },
-      fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '查询记录失败'
-        })
-        console.error('[数据库] [查询记录] 失败：', err)
+      success: res=>{
+        this.setData({type:res.data[0].type})
+        if(res.data[0].type=='乘客'){
+          db.collection('order').where({
+            _openid: app.globalData.openid
+          }).get({
+            success: res => {
+              console.log(res.data)
+              this.setData({orders:res.data})
+            },
+            fail: err => {
+              wx.showToast({
+                icon: 'none',
+                title: '查询记录失败'
+              })
+            }
+          })
+        }else if(res.data[0].type=='车主'){
+          db.collection('order').where({
+            driverId: app.globalData.openid
+          }).get({
+            success: res => {
+              this.setData({orders:res.data})
+            },
+            fail: err => {
+              wx.showToast({
+                icon: 'none',
+                title: '查询记录失败'
+              })
+            }
+          })
+        }
       }
     })
 	},
